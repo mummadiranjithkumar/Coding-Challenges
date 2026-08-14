@@ -133,24 +133,59 @@
 # print("no of unique elemets: ", l+1)
 
 #remove value from the list
+# class Solution(object):
+#     def removeElement(self, nums, val):
+#         l = 0
+
+#         for i in range(len(nums)):
+#             if nums[i] == val:
+#                 continue
+#             else:
+#                 nums[l] = nums[i]
+#                 l += 1
+
+#         return nums[:l]
+
+
+# obj = Solution()
+
+# nums = [0,1,2,2,3,0,4,2]
+# val = 2
+
+# print(obj.removeElement(nums, val))    
+        
+
 class Solution(object):
-    def removeElement(self, nums, val):
-        l = 0
+    def merge(self, nums1, m, nums2, n):
 
-        for i in range(len(nums)):
-            if nums[i] == val:
-                continue
+        i = m - 1          # Last valid element in nums1
+        j = n - 1          # Last element in nums2
+        k = m + n - 1      # Last position in nums1
+
+        while i >= 0 and j >= 0:
+
+            if nums1[i] > nums2[j]:
+                nums1[k] = nums1[i]
+                i -= 1
             else:
-                nums[l] = nums[i]
-                l += 1
+                nums1[k] = nums2[j]
+                j -= 1
 
-        return nums[:l]
+            k -= 1
 
+        # Copy remaining elements from nums2 (if any)
+        while j >= 0:
+            nums1[k] = nums2[j]
+            j -= 1
+            k -= 1
+
+nums1 = [1,2,3,0,0,0]
+m = 3
+
+nums2 = [2,5,6]
+n = 3
 
 obj = Solution()
+obj.merge(nums1, m, nums2, n)
 
-nums = [0,1,2,2,3,0,4,2]
-val = 2
-
-print(obj.removeElement(nums, val))    
-        
+print(nums1)
